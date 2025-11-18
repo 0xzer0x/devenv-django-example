@@ -1,29 +1,84 @@
-# Django-Todolist
+# Devenv Django Example
 
-Django-Todolist is a todolist web application with the most basic features of
-most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
+## Overview
 
----
+This repository is a demonstrative example on how to use [Devenv](https://devenv.sh) to spin up complete development environments in seconds. The base project used is a Python [Django](https://docs.djangoproject.com) website.
 
-CSS | [Skeleton](http://getskeleton.com/) JS | [jQuery](https://jquery.com/)
+## Getting Started
 
-I've also build a quite similar app in Flask:
-https://github.com/rtzll/flask-todolist
+### Install Nix and Devenv
 
-## Explore
+If you already have `nix` and `devenv` installed, you can skip the following section.
 
-Try it out by installing the dependencies using
-[uv](https://docs.astral.sh/uv/).
+1. Install Nix using the following command:
 
-    uv sync
+```sh
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
+```
 
-Migrate:
+2. Install `devenv`:
 
-    uv run python manage.py migrate
+```sh
+nix profile add nixpkgs#devenv
+```
 
-And then start the server (default: http://localhost:8000)
+3. Verify `devenv` is accessible:
 
-    uv run python manage.py runserver
+```sh
+devenv --version
+```
 
-Now you can browse the [API](http://localhost:8000/api/) or start on the
-[landing page](http://localhost:8000/)
+### Activate Development Environment
+
+1. Navigate to the path where you cloned the repository:
+
+```sh
+cd path/to/repo
+```
+
+2. Activate `devenv` environment:
+
+```sh
+devenv shell
+```
+
+### Setup Automatic Shell Activation
+
+1. Install `direnv`:
+
+```sh
+nix profile add nixpkgs#direnv nixpkgs#nix-direnv
+```
+
+2. Hook `direnv` into your shell (refer to [`direnv` docs](https://direnv.net/docs/hook.html) for other shells):
+
+```sh
+# NOTE: Use equivalent for your shell
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+# NOTE: You can also open a new shell session
+source ~/.bashrc
+```
+
+3. Create `.envrc` file in repository directory:
+
+```sh
+cat <<"EOF" > .envrc
+#!/usr/bin/env bash
+
+eval "$(devenv direnvrc)"
+
+# You can pass flags to the devenv command
+# For example: use devenv --impure --option services.postgres.enable:bool true
+use devenv
+EOF
+```
+
+4. Allow `direnv` to automatically load `.envrc` from this directory:
+
+```sh
+direnv allow .
+```
+
+## Acknowledgements
+
+- Original Django repository: <https://github.com/rtzll/django-todolist>
