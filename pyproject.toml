@@ -5,9 +5,11 @@ description = "Django Todo List application"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "asgiref",
-    "Django",
-    "djangorestframework",
-    "pytz",
-    "sqlparse",
+  "asgiref",
+  "Django",
+  "djangorestframework",
+  "pytz",
+  "sqlparse",
+  "dj-database-url",
+  "psycopg2-binary",
 ]
