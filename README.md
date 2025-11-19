@@ -16,13 +16,19 @@ If you already have `nix` and `devenv` installed, you can skip the following sec
 curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 
-2. Install `devenv`:
+2. Add your user to the trusted users in `/etc/nix/nix.custom.conf`:
+
+```sh
+echo "trusted-users = root $USER" | sudo tee /etc/nix/nix.custom.conf
+```
+
+3. Install `devenv`:
 
 ```sh
 nix profile add nixpkgs#devenv
 ```
 
-3. Verify `devenv` is accessible:
+4. Verify `devenv` is accessible:
 
 ```sh
 devenv --version
