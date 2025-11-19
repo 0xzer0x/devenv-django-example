@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
+inputs:
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+  nixpkgs-python:
+    url: github:cachix/nixpkgs-python
+    inputs:
+      # FIX: Required to prevent rebuilding Python from source.
+      # Pins nixpkgs used by nixpkgs-python to the commit in nixpkgs-python's flake.lock file.
+      # Ref: https://github.com/cachix/devenv/issues/2022
+      nixpkgs:
+        # NOTE: Run the following command to get the commit-locked nixpkgs URL:
+        # curl -fsSL https://github.com/cachix/nixpkgs-python/raw/refs/heads/main/flake.lock | jq -r '"github:NixOS/nixpkgs/\(.nodes.nixpkgs.locked.rev)"'
+        url: github:NixOS/nixpkgs/3ff0e34b1383648053bba8ed03f201d3466f90c9

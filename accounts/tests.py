@@ -1,4 +1,3 @@
-from django import forms
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
@@ -81,7 +80,6 @@ class AccountsTests(TestCase):
 
 
 class LoginFormTests(TestCase):
-
     # valid test case is covered by AccountsTests (because we need a user)
     def setUp(self):
         self.too_long_password = {"username": "test", "password": 65 * "X"}
