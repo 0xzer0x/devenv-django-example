@@ -11,6 +11,7 @@
   env = {
     PYTHONPATH = config.git.root;
     DJANGO_SETTINGS_MODULE = "todolist.settings";
+    DATABASE_URL = "postgresql://todo:todo@localhost:5432/todo";
   };
 
   # NOTE: https://devenv.sh/languages/
